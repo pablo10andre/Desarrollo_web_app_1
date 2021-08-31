@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="desarrollo-web/desarrollo-web/.mvn/wrapper"/>
+	<classpathentry kind="src" path="desarrollo-web/desarrollo-web/src/main/java"/>
+	<classpathentry kind="src" path="desarrollo-web/desarrollo-web/src/test/java"/>
+	<classpathentry kind="lib" path="desarrollo-web/desarrollo-web/target/desarrollo-web-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="desarrollo-web/desarrollo-web/target/classes"/>
+</classpath>
