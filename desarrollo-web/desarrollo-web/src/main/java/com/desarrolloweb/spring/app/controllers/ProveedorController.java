@@ -36,7 +36,7 @@ public class ProveedorController {
 
 		Proveedor proveedor = proveedorRepository.findById(id).get();
 		if (proveedor == null) {
-			return "redirect:/listar-proveedor";
+			return "redirect:/listar-proveedores";
 		}
 
 		model.addAttribute("titulo", "Detalle Proveedor: " + proveedor.getNombre());
@@ -52,7 +52,7 @@ public class ProveedorController {
 
 		Page<Proveedor> proveedores = proveedorRepository.findAll(pageRequest);
 
-		PageRender<Proveedor> pageRender = new PageRender<Proveedor>("/listar-proveedor", proveedores);
+		PageRender<Proveedor> pageRender = new PageRender<Proveedor>("/listar-proveedores", proveedores);
 		model.addAttribute("titulo", "Listado de proveedores");
 		model.addAttribute("proveedores", proveedores);
 		model.addAttribute("page", pageRender);
@@ -74,7 +74,7 @@ public class ProveedorController {
 		if (id > 0) {
 			proveedor = proveedorRepository.findById(id).get();
 		} else {
-			return "redirect:/listar-proveedor";
+			return "redirect:/listar-proveedores";
 		}
 		model.addAttribute("titulo", "Editar proveedor");
 		model.addAttribute("proveedor", proveedor);
