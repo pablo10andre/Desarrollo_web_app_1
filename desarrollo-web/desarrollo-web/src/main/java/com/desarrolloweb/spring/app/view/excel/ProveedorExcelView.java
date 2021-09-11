@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.desarrolloweb.spring.app.entities.Proveedor;
 
-@Component("detalle-proveedor-form.xlsx")
+@Component("listado-proveedores.xlsx")
 public class ProveedorExcelView extends AbstractXlsxView {
 
 	@Override

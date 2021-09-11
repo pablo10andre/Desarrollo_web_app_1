@@ -14,7 +14,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("detalle-proveedor-form.pdf")
+@Component("listado-proveedores-form.pdf")
 public class ProveedoresPdfView extends AbstractPdfView {
 
 	@Override
