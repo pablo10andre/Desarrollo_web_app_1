@@ -14,7 +14,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("detalle-cliente-form.pdf")
+@Component("listado-cliente-form.pdf")
 public class ClientePdfView extends AbstractPdfView {
 
 	@Override

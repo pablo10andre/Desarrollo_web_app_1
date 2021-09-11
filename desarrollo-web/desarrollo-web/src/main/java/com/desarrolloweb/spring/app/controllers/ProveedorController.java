@@ -46,7 +46,7 @@ public class ProveedorController {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/listar-proveedores", method = RequestMethod.GET)
-	public String listarClientes(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	public String listarProveedores(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 4);
 

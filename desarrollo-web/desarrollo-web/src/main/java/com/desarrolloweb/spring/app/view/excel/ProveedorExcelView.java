@@ -50,11 +50,7 @@ public class ProveedorExcelView extends AbstractXlsxView {
 			cell = row.createCell(1);
 			cell.setCellValue(proveedor.getNombre());
 			
-			row = sheet.createRow(2);
-			cell = row.createCell(0);
-			cell.setCellValue("Apellidos");
-			cell = row.createCell(1);
-			cell.setCellValue(proveedor.getApellido());
+		
 
 		} catch (Exception e) {
 			e.printStackTrace();

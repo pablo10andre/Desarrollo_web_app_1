@@ -26,15 +26,10 @@ public class Proveedor extends AbstractEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String apellido;
     private String direccion;
     private String telefono;
 
-    @Column(name = "fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd-MM-yyyy")
-    private Date fechaNacimiento;
-    
+  
     private String email;
 
     private String foto;
@@ -63,13 +58,7 @@ public class Proveedor extends AbstractEntity implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+    
 
     public String getDireccion() {
         return direccion;
@@ -85,14 +74,6 @@ public class Proveedor extends AbstractEntity implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
     }
 
 	public String getEmail() {

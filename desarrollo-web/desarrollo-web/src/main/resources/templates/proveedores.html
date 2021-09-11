@@ -23,7 +23,6 @@
 							<td>Apellido</td>
 							<td>Direccion</td>
 							<td>Telefono</td>
-							<td>Fecha Nacimiento</td>
 							<td>Email</td>
 							<td>Editar</td>
 							<td sec:authorize="hasRole('ADMIN')">Eliminar</td>
@@ -33,13 +32,12 @@
 						<tr th:each="proveedor: ${proveedores}"
 							th:style="${proveedor.direccion == null} ? 'background-color: red'">
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/detalle-proveedor/} + ${proveedor.id}" th:text="${proveedor.id}"></a></td>
+							th:href="@{/detalle-proveedor/} + ${proveedor.id}" th:text="${proveedor.id}"></a></td>
 							<td th:text="${proveedor.nombre}"></td>
-							<td th:text="${proveedor.apellido}"></td>
 							<td th:text="${proveedor.direccion}"></td>
 							<td th:text="${proveedor.telefono}"
 								th:style="${proveedor.telefono == null} ? 'background-color: red'"></td>
-							<td th:text="${proveedor.fechaNacimiento}"></td>
+						
 							<td th:text="${proveedor.email}"></td>
 							<td class="text-center"><a
 								class="btn btn-outline-success btn-xs"

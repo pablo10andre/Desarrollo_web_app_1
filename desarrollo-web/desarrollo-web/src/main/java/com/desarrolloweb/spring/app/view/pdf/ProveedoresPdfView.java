@@ -27,7 +27,7 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		tabla.setSpacingAfter(20);
 		
 		tabla.addCell(proveedor.getNombre());
-		tabla.addCell(proveedor.getApellido());
+		
 	
 		document.add(tabla);
 	}
