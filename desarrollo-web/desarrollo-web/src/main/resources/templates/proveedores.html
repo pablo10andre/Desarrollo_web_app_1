@@ -9,10 +9,15 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 
+
+				<!-- Pablo marica###################### --> 
+
 				<h4 class="card-tittle">
 
 					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/nuevo-proveedor}"
 						class="btn btn-outline-primary btn-xs">Agregar Proveedor</a>
+
+
 				</h4>
 				<nav th:replace="paginator-nav :: paginator"></nav>
 				<table class="table table-striped " th:if="${!proveedores.isEmpty()}">
