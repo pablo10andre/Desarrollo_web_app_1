@@ -14,7 +14,7 @@
 
 					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/nuevo-proveedor}"
 						class="btn btn-outline-primary btn-xs">Agregar Proveedor</a>
-			<a class="btn btn-danger btn-xs float-right" th:href="@{'/listar-proveedores' (format=pdf)}">PDF</a>
+			<a class="btn btn-danger btn-xs float-right" th:href="@{'listar-proveedores' (format=pdf)}">PDF</a>
 					
 						
 				</h4>
