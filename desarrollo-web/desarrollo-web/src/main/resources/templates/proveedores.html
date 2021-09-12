@@ -14,9 +14,10 @@
 
 					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/nuevo-proveedor}"
 						class="btn btn-outline-primary btn-xs">Agregar Proveedor</a>
-			<a class="btn btn-danger btn-xs float-right" th:href="@{'/listar-proveedores' (format=pdf)}">PDF</a>
-					
-						
+
+	<a class="btn btn-danger btn-xs float-right" th:href="@{'/listar-proveedores' (format=pdf)}">PDF</a>
+		<a class="btn btn-success btn-xs float-right" th:href="@{'/listar-proveedores' (format=xlsx)}">EXCEL</a> 
+
 				</h4>
 				<nav th:replace="paginator-nav :: paginator"></nav>
 				<table class="table table-striped " th:if="${!proveedores.isEmpty()}">

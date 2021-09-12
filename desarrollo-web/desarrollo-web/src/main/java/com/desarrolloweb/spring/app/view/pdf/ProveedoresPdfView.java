@@ -1,6 +1,7 @@
 package com.desarrolloweb.spring.app.view.pdf;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+
 @Component("proveedores.pdf")
 public class ProveedoresPdfView extends AbstractPdfView {
 
@@ -21,11 +23,24 @@ public class ProveedoresPdfView extends AbstractPdfView {
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		Proveedor proveedor = (Proveedor) model.get("proveedor");
-		
+
+		Iterable<Proveedor> pr= (Iterable<Proveedor>) model.get("proveedoresPdf");
 		PdfPTable tabla = new PdfPTable(1);
 		tabla.setSpacingAfter(20);
-		//tabla.addCell();
+
+
+		
+		
+		for(Proveedor proveedor:pr) {
+			tabla.addCell(proveedor.getNombre()+"|"+proveedor.getDireccion()+"|"+proveedor.getTelefono()+"|"+proveedor.getEmail());
+			
+			
+		}
+		
+	
+	
+		
+
 		document.add(tabla);
 	}
 

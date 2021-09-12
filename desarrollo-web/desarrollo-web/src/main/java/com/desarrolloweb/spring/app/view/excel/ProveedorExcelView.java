@@ -16,9 +16,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
+import com.desarrolloweb.spring.app.entities.Cliente;
 import com.desarrolloweb.spring.app.entities.Proveedor;
 
-@Component("/listar-proveedores")
+
+@Component("proveedores.xlsx")
+
 public class ProveedorExcelView extends AbstractXlsxView {
 
 	@Override
@@ -27,11 +30,13 @@ public class ProveedorExcelView extends AbstractXlsxView {
 		
 
 		try {
+
 			response.setHeader("Content-Disposition", "attachment; filename=\"reporte_proveedores.xlsx\"");
 			
-			
-			Proveedor proveedor = (Proveedor) model.get("proveedor");
 			Sheet sheet = workbook.createSheet("Proveedor");
+			response.setHeader("Content-Disposition", "attachment; filename=\"reporte_clientes.xlsx\"");
+			Iterable<Proveedor> pr= (Iterable<Proveedor>) model.get("proveedoresPdf");;
+		
 			
 			CellStyle header = workbook.createCellStyle();
 			header.setBorderBottom(BorderStyle.MEDIUM);
@@ -40,19 +45,33 @@ public class ProveedorExcelView extends AbstractXlsxView {
 			header.setBorderLeft(BorderStyle.MEDIUM);
 			header.setFillForegroundColor(IndexedColors.GREEN.index);
 			header.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			
 			Row row = sheet.createRow(0);
 			Cell cell = row.createCell(0);
-			cell.setCellValue("Datos del Proveedor");
+			cell.setCellValue("Datos de los Proveedores");
 			cell.setCellStyle(header);
-			
+			int i=2;
 			row = sheet.createRow(1);
 			cell = row.createCell(0);
-			cell.setCellValue("Nombre");
+			cell.setCellValue("Nombre Proveedor");
 			cell = row.createCell(1);
-			cell.setCellValue(proveedor.getNombre());
+			cell.setCellValue("Email");
+			cell = row.createCell(2);
+			cell.setCellValue("Direccion");
+			cell = row.createCell(3);
+			cell.setCellValue("Telefono");
+			for(Proveedor proveedor:pr) {
+				row = sheet.createRow(i);
+				cell = row.createCell(0);
+				cell.setCellValue(proveedor.getNombre());
+				cell = row.createCell(1);
+				cell.setCellValue(proveedor.getEmail());
+				cell = row.createCell(2);
+				cell.setCellValue(proveedor.getDireccion());
+				cell = row.createCell(3);
+				cell.setCellValue(proveedor.getTelefono());
+				i++;
+			}
 			
-		
 
 		} catch (Exception e) {
 			e.printStackTrace();

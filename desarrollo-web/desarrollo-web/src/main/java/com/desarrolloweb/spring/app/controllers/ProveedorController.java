@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.desarrolloweb.spring.app.repositories.ProveedorRepository;
-import com.desarrolloweb.spring.app.util.PageRender;
 import com.desarrolloweb.spring.app.entities.Audit;
 import com.desarrolloweb.spring.app.entities.Proveedor;
+import com.desarrolloweb.spring.app.repositories.ProveedorRepository;
+import com.desarrolloweb.spring.app.util.PageRender;
 
 @Controller
 public class ProveedorController {
@@ -44,6 +45,8 @@ public class ProveedorController {
 		return "detalle-proveedor-form";
 	}
 	
+	
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/listar-proveedores", method = RequestMethod.GET)
 	public String listarProveedores(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
@@ -51,14 +54,28 @@ public class ProveedorController {
 		Pageable pageRequest = PageRequest.of(page, 4);
 
 		Page<Proveedor> proveedores = proveedorRepository.findAll(pageRequest);
-
+		Iterable<Proveedor> listSupp=proveedorRepository.findAll();
 		PageRender<Proveedor> pageRender = new PageRender<Proveedor>("/listar-proveedores", proveedores);
 		model.addAttribute("titulo", "Listado de proveedores");
 		model.addAttribute("proveedores", proveedores);
 		model.addAttribute("page", pageRender);
+		model.addAttribute("proveedoresPdf",listSupp);
 		return "proveedores";
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/nuevo-proveedor", method = RequestMethod.GET)
 	public String nuevoProveedor(Model model) {

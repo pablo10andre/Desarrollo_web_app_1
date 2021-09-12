@@ -29,7 +29,7 @@ public class ClienteExcelView extends AbstractXlsxView {
 		try {
 			response.setHeader("Content-Disposition", "attachment; filename=\"reporte_clientes.xlsx\"");
 			Cliente cliente = (Cliente) model.get("cliente");
-			Sheet sheet = workbook.createSheet("Cliente");
+			Sheet sheet = workbook.createSheet("Proveedores");
 			
 			CellStyle header = workbook.createCellStyle();
 			header.setBorderBottom(BorderStyle.MEDIUM);
@@ -41,7 +41,7 @@ public class ClienteExcelView extends AbstractXlsxView {
 			
 			Row row = sheet.createRow(0);
 			Cell cell = row.createCell(0);
-			cell.setCellValue("Datos del Cliente");
+			cell.setCellValue("Datos del Proveedor");
 			cell.setCellStyle(header);
 			
 			row = sheet.createRow(1);
