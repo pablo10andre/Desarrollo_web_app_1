@@ -14,7 +14,7 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("listado-proveedores-form.pdf")
+@Component("listar-proveedores.pdf")
 public class ProveedoresPdfView extends AbstractPdfView {
 
 	@Override
@@ -25,11 +25,9 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		
 		PdfPTable tabla = new PdfPTable(1);
 		tabla.setSpacingAfter(20);
-		
-		tabla.addCell(proveedor.getNombre());
-		
-	
+		tabla.addCell("hola como estas");
 		document.add(tabla);
 	}
 
 }
+

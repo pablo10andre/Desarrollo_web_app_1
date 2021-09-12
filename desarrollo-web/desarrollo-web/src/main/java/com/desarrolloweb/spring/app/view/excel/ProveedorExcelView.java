@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import com.desarrolloweb.spring.app.entities.Proveedor;
 
-@Component("listado-proveedores.xlsx")
+@Component("/listar-proveedores")
 public class ProveedorExcelView extends AbstractXlsxView {
 
 	@Override
@@ -28,6 +28,8 @@ public class ProveedorExcelView extends AbstractXlsxView {
 
 		try {
 			response.setHeader("Content-Disposition", "attachment; filename=\"reporte_proveedores.xlsx\"");
+			
+			
 			Proveedor proveedor = (Proveedor) model.get("proveedor");
 			Sheet sheet = workbook.createSheet("Proveedor");
 			
