@@ -15,6 +15,22 @@ import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
+import com.desarrolloweb.spring.app.entities.Proveedor;
+import com.lowagie.text.Document;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+//import com.lowagie.text.pdf.PdfCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+//import antlr.collections.List;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 
 @Component("proveedores.pdf")
 public class ProveedoresPdfView extends AbstractPdfView {
@@ -29,6 +45,22 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		tabla.setSpacingAfter(20);
 
 
+		Proveedor p = new Proveedor();
+		List<Proveedor> l = new ArrayList<Proveedor>();
+		List<Proveedor> lista = new ArrayList<Proveedor>();
+		lista.add(p);
+		
+		PdfPCell ctitulo = new PdfPCell();
+		PdfPCell csalto = new PdfPCell();
+		Font ftitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+		PdfPCell cproveedor = new PdfPCell();
+		Font fproveedor = FontFactory.getFont(FontFactory.COURIER_BOLDOBLIQUE);
+		//Color y fuente titulo
+		ftitulo.setColor(Color.BLACK);
+		ftitulo.setSize(24);
+		ctitulo.setHorizontalAlignment(ctitulo.ALIGN_CENTER);
+		ctitulo.setBorder(ctitulo.NO_BORDER);
+		ctitulo.setPhrase(new Phrase("LISTADO DE PROVEEDORES",ftitulo));
 		
 		
 		for(Proveedor proveedor:pr) {
@@ -39,8 +71,7 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		
 	
 	
-		
-
+	
 		document.add(tabla);
 	}
 
