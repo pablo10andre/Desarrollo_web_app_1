@@ -78,7 +78,7 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		tabla.addCell(csalto);
 		tabla.addCell(csalto);		
 		for(Proveedor proveedor:pr) {
-			cproveedor.setPhrase(new Phrase(proveedor.getId() + ", " + proveedor.getNombre() + ", " + proveedor.getEmail() + ", " + ", " + proveedor.getDireccion() + ", " + proveedor.getTelefono(),fproveedor));
+			cproveedor.setPhrase(new Phrase(proveedor.getId() + ", " + proveedor.getNombre() + ", " + proveedor.getEmail() + ", " + proveedor.getDireccion() + ", " + proveedor.getTelefono(),fproveedor));
 			//tabla.addCell(proveedor.getNombre()+"|"+proveedor.getDireccion()+"|"+proveedor.getTelefono()+"|"+proveedor.getEmail());	
 			tabla.addCell(cproveedor);
 		}
