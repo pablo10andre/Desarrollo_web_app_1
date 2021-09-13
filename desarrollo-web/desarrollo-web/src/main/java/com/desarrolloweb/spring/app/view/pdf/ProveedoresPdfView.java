@@ -42,9 +42,6 @@ public class ProveedoresPdfView extends AbstractPdfView {
 
 		Iterable<Proveedor> pr= (Iterable<Proveedor>) model.get("proveedoresPdf");
 		PdfPTable tabla = new PdfPTable(1);
-		tabla.setSpacingAfter(20);
-
-
 		Proveedor p = new Proveedor();
 		List<Proveedor> l = new ArrayList<Proveedor>();
 		List<Proveedor> lista = new ArrayList<Proveedor>();
@@ -55,6 +52,7 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		Font ftitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 		PdfPCell cproveedor = new PdfPCell();
 		Font fproveedor = FontFactory.getFont(FontFactory.COURIER_BOLDOBLIQUE);
+		
 		//Color y fuente titulo
 		ftitulo.setColor(Color.BLACK);
 		ftitulo.setSize(24);
@@ -62,16 +60,28 @@ public class ProveedoresPdfView extends AbstractPdfView {
 		ctitulo.setBorder(ctitulo.NO_BORDER);
 		ctitulo.setPhrase(new Phrase("LISTADO DE PROVEEDORES",ftitulo));
 		
+		//Color y fuente proveedor
+		fproveedor.setColor(Color.BLACK);
+		fproveedor.setSize(16);
+		cproveedor.setBackgroundColor(Color.CYAN);
+		cproveedor.setHorizontalAlignment(ctitulo.ALIGN_LEFT);
+		cproveedor.setBorderColor(Color.BLUE);
+		cproveedor.setBorderWidth(2);
+		cproveedor.setVerticalAlignment(ctitulo.ALIGN_BASELINE);
+		//cproveedor.setPhrase(new Phrase(proveedor.getId() + ", " + proveedor.getNombre() + ", " + proveedor.getEmail(),fproveedor));
+		csalto.setBorder(ctitulo.NO_BORDER);
+		csalto.setPhrase(new Phrase("",ftitulo));		
 		
+		//Ingreso
+		tabla.setSpacingAfter(20);
+		tabla.addCell(ctitulo);	
+		tabla.addCell(csalto);
+		tabla.addCell(csalto);		
 		for(Proveedor proveedor:pr) {
-			tabla.addCell(proveedor.getNombre()+"|"+proveedor.getDireccion()+"|"+proveedor.getTelefono()+"|"+proveedor.getEmail());
-			
-			
+			cproveedor.setPhrase(new Phrase(proveedor.getId() + ", " + proveedor.getNombre() + ", " + proveedor.getEmail() + ", " + ", " + proveedor.getDireccion() + ", " + proveedor.getTelefono(),fproveedor));
+			//tabla.addCell(proveedor.getNombre()+"|"+proveedor.getDireccion()+"|"+proveedor.getTelefono()+"|"+proveedor.getEmail());	
+			tabla.addCell(cproveedor);
 		}
-		
-	
-	
-	
 		document.add(tabla);
 	}
 
