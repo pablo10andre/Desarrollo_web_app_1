@@ -113,6 +113,59 @@ public class ProveedorExcelView extends AbstractXlsxView {
 			cell.setCellValue("LISTADO DE PROVEEDORES");
 			cell.setCellStyle(ctitulo);
 			
+			//ID
+			row = sheet.createRow(3);
+			cell = row.createCell(1);
+			cell.setCellValue("ID");
+			cell.setCellStyle(catrib);
+			
+			//NOMBRE
+			cell = row.createCell(2);
+			cell.setCellValue("NOMBRE");
+			cell.setCellStyle(catrib);
+			
+			//EMAIL
+			cell = row.createCell(3);
+			cell.setCellValue("EMAIL");
+			cell.setCellStyle(catrib);
+			
+			//DIRECCION
+			cell = row.createCell(4);
+			cell.setCellValue("DIRECCION");
+			cell.setCellStyle(catrib);
+			
+			//TELEFONO
+			cell = row.createCell(5);
+			cell.setCellValue("TELEFONO");
+			cell.setCellStyle(catrib);
+			
+			//FIN
+				
+			int i=4;
+			for(Proveedor proveedor:pr) {
+				row = sheet.createRow(i);
+				cell = row.createCell(1);
+				cell.setCellValue(proveedor.getId());
+				cell.setCellStyle(cobj);
+				cell = row.createCell(2);
+				cell.setCellValue(proveedor.getNombre());
+				cell.setCellStyle(cobj);
+				cell = row.createCell(3);
+				cell.setCellValue(proveedor.getEmail());
+				cell.setCellStyle(cobj);
+				cell = row.createCell(4);
+				cell.setCellValue(proveedor.getDireccion());
+				cell.setCellStyle(cobj);
+				cell = row.createCell(5);
+				cell.setCellValue(proveedor.getTelefono());
+				cell.setCellStyle(cobj);
+				i++;
+			}
+			sheet.autoSizeColumn(1);
+			sheet.autoSizeColumn(2);
+			sheet.autoSizeColumn(3);
+			sheet.autoSizeColumn(4);
+			sheet.autoSizeColumn(5);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
