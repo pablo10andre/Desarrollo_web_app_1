@@ -19,83 +19,81 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.desarrolloweb.spring.app.repositories.ClienteRepository;
+import com.desarrolloweb.spring.app.repositories.EmpleadoRepository;
 import com.desarrolloweb.spring.app.util.PageRender;
 import com.desarrolloweb.spring.app.entities.Audit;
-import com.desarrolloweb.spring.app.entities.Cliente;
-
+import com.desarrolloweb.spring.app.entities.Empleado;
 @Controller
 public class EmpleadoController {
 
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private EmpleadoRepository empleadoRepository;
 
-	@RequestMapping(value = "/detalle-cliente/{id}", method = RequestMethod.GET)
-	public String detalleCliente(@PathVariable(value = "id") Long id, Model model) {
+	@RequestMapping(value = "/detalle-empleado/{id}", method = RequestMethod.GET)
+	public String detalleEmpleado(@PathVariable(value = "id") Long id, Model model) {
 
-		Cliente cliente = clienteRepository.findById(id).get();
-		if (cliente == null) {
-			return "redirect:/listar-clientes";
+		Empleado empleado= empleadoRepository.findById(id).get();
+		if (empleado == null) {
+			return "redirect:/listar-empleados";
 		}
 
-		model.addAttribute("titulo", "Detalle Cliente: " + cliente.getNombre());
-		model.addAttribute("cliente", cliente);
-		return "detalle-cliente-form";
+		model.addAttribute("titulo", "Detalle empleado: " + empleado.getNombre());
+		model.addAttribute("empleado", empleado);
+		return "detalle-empleado-form";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@RequestMapping(value = "/listar-clientes", method = RequestMethod.GET)
-	public String listarClientes(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	@RequestMapping(value = "/listar-empleados", method = RequestMethod.GET)
+	public String listarEmpleados(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 4);
 
-		Page<Cliente> clientes = clienteRepository.findAll(pageRequest);
+		Page<Empleado> empleados= empleadoRepository.findAll(pageRequest);
 
-		PageRender<Cliente> pageRender = new PageRender<Cliente>("/listar-clientes", clientes);
-		model.addAttribute("titulo", "Listado de clientes");
-		model.addAttribute("clientes", clientes);
+		PageRender<Empleado> pageRender = new PageRender<Empleado>("/listar-empleados", empleados);
+		model.addAttribute("titulo", "Listado de empleados");
+		model.addAttribute("empleados", empleados);
 		model.addAttribute("page", pageRender);
-		return "clientes";
+		return "empleados";
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@RequestMapping(value = "/nuevo-cliente", method = RequestMethod.GET)
+	@RequestMapping(value = "/nuevo-empleado", method = RequestMethod.GET)
 	public String nuevoCliente(Model model) {
-		Cliente cliente = new Cliente();
+		Empleado empleado= new Empleado();
 		model.addAttribute("titulo", "Nuevo Cliente");
-		model.addAttribute("cliente", cliente);
-		return "form-cliente";
+		model.addAttribute("empleado", empleado);
+		return "form-empleado";
 	}
 
-	@RequestMapping(value = "/editar-cliente/{id}", method = RequestMethod.GET)
-	public String editarCliente(@PathVariable(value = "id") Long id, Model model) {
-		Cliente cliente = null;
+	@RequestMapping(value = "/editar-empleado/{id}", method = RequestMethod.GET)
+	public String editarEmpleado(@PathVariable(value = "id") Long id, Model model) {
+		Empleado empleado = null;
 		if (id > 0) {
-			cliente = clienteRepository.findById(id).get();
+			empleado = empleadoRepository.findById(id).get();
 		} else {
-			return "redirect:/listar-clientes";
+			return "redirect:/listar-empleados";
 		}
-		model.addAttribute("titulo", "Editar Cliente");
-		model.addAttribute("cliente", cliente);
-		return "form-cliente";
+		model.addAttribute("titulo", "Editar Empleado");
+		model.addAttribute("empleado", empleado);
+		return "form-empleado";
 	}
 
-	@RequestMapping(value = "/eliminar-cliente/{id}", method = RequestMethod.GET)
-	public String eliminarCliente(@PathVariable(value = "id") Long id, Model model) {
-		Cliente cliente = null;
+	@RequestMapping(value = "/eliminar-empleado/{id}", method = RequestMethod.GET)
+	public String eliminarEmpleado(@PathVariable(value = "id") Long id, Model model) {
+		Empleado empleado= null;
 		if (id > 0) {
-			cliente = clienteRepository.findById(id).get();
-			clienteRepository.delete(cliente);
+			empleado = empleadoRepository.findById(id).get();
+			empleadoRepository.delete(empleado);
 		} else {
-			return "redirect:/listar-clientes";
+			return "redirect:/listar-empleados";
 		}
 
-		return "redirect:/listar-clientes";
+		return "redirect:/listar-empleados";
 	}
 
-	@RequestMapping(value = "/nuevo-cliente", method = RequestMethod.POST)
-	public String guardarCliente(@RequestParam("file") MultipartFile foto, Cliente cliente) {
+	@RequestMapping(value = "/nuevo-empleado", method = RequestMethod.POST)
+	public String guardarCliente(@RequestParam("file") MultipartFile foto, Empleado empleado) {
 		Audit audit = null;
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -111,27 +109,27 @@ public class EmpleadoController {
 				byte[] bytes = foto.getBytes();
 				Path rutaCompleta = Paths.get(path);
 				Files.write(rutaCompleta, bytes);
-				cliente.setFoto(foto.getOriginalFilename());
+				empleado.setFoto(foto.getOriginalFilename());
 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 
-		if (cliente.getId() != null && cliente.getId() > 0) {
-			Cliente cliente2 = clienteRepository.findById(cliente.getId()).get();
+		if (empleado.getId() != null && empleado.getId() > 0) {
+			Empleado empleado2= empleadoRepository.findById(empleado.getId()).get();
 			audit = new Audit(auth.getName());
-			cliente.setAudit(audit);
-			cliente.setId(cliente2.getId());
-			cliente.getAudit().setTsCreated(cliente2.getAudit().getTsCreated());
-			cliente.getAudit().setUsuCreated(cliente2.getAudit().getUsuCreated());
+			empleado.setAudit(audit);
+			empleado.setId(empleado2.getId());
+			empleado.getAudit().setTsCreated(empleado.getAudit().getTsCreated());
+			empleado.getAudit().setUsuCreated(empleado2.getAudit().getUsuCreated());
 		} else {
 			audit = new Audit(auth.getName());
-			cliente.setAudit(audit);
+			empleado.setAudit(audit);
 		}
 
-		clienteRepository.save(cliente);
-		return "redirect:/listar-clientes";
+		empleadoRepository.save(empleado);
+		return "redirect:/listar-empleados";
 	}
 
 }

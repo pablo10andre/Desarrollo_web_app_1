@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<div class="card">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-tittle">
+
+					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/nuevo-empleado}"
+						class="btn btn-outline-primary btn-xs">Agregar Empleado</a>
+				</h4>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+				<table class="table table-striped " th:if="${!empleados.isEmpty()}">
+					<thead class="bg-dark text-white text-center">
+						<tr>
+							<td>Id</td>
+							<td>DPI</td>
+							<td>Nombre</td>
+							<td>Apellido</td>	
+							<td>Telefono</td>
+							<td>Email</td>
+							<td>Editar</td>
+							<td sec:authorize="hasRole('ADMIN')">Eliminar</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="empleado: ${empleados}">
+								<td><a class="btn btn-primary btn-xs"
+								th:href="@{/detalle-empleado/} + ${empleado.id}" th:text="${empleado.id}"></a></td>
+							<td th:text="${empleado.dpi}"></td>
+							<td th:text="${empleado.nombre}"></td>
+							<td th:text="${empleado.apellido}"></td>
+							<td th:text="${empleado.telefono}"
+								th:style="${empleado.telefono == null} ? 'background-color: red'"></td>
+							<td th:text="${empleado.email}"></td>
+							<td class="text-center"><a
+								class="btn btn-outline-success btn-xs"
+								th:href="@{/editar-empleado/} + ${empleado.id}">Editar</a></td>
+							<td class="text-center" ><a
+								class="btn btn-outline-danger btn-xs"
+								th:href="@{/eliminar-empleado/} + ${empleado.id}"
+								onclick="return confirm('Desea eliminar el Cliente?');">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
