@@ -13,6 +13,10 @@
 
 					<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/nuevo-empleado}"
 						class="btn btn-outline-primary btn-xs">Agregar Empleado</a>
+						
+						<a class="btn btn-danger btn-xs float-right" th:href="@{'/listar-empleados' (format=pdf)}">PDF</a>
+	
+						
 				</h4>
 				<nav th:replace="paginator-nav :: paginator"></nav>
 				<table class="table table-striped " th:if="${!empleados.isEmpty()}">

@@ -41,17 +41,16 @@ HttpServletRequest request, HttpServletResponse response) throws Exception {
 		PdfPCell cempleado = new PdfPCell();
 		Font fempleado = FontFactory.getFont(FontFactory.COURIER_BOLDOBLIQUE);
 		
-		//Color y fuente titulo
+		
 		ftitulo.setColor(Color.BLACK);
-		ftitulo.setSize(24);
+		ftitulo.setSize(27);
 		ctitulo.setHorizontalAlignment(ctitulo.ALIGN_CENTER);
 		ctitulo.setBorder(ctitulo.NO_BORDER);
-		ctitulo.setPhrase(new Phrase("LISTADO DE PROVEEDORES",ftitulo));
-		
-		//Color y fuente proveedor
+		ctitulo.setPhrase(new Phrase("LISTADO DE EMPLEADOS",ftitulo));
+	
 		fempleado.setColor(Color.BLACK);
 		fempleado.setSize(16);
-		cempleado.setBackgroundColor(Color.CYAN);
+		cempleado.setBackgroundColor(Color.lightGray);
 		cempleado.setHorizontalAlignment(ctitulo.ALIGN_LEFT);
 		cempleado.setBorderColor(Color.BLUE);
 		cempleado.setBorderWidth(2);
@@ -60,7 +59,7 @@ HttpServletRequest request, HttpServletResponse response) throws Exception {
 		csalto.setBorder(ctitulo.NO_BORDER);
 		csalto.setPhrase(new Phrase("",ftitulo));		
 		
-		//Ingreso
+	
 		tabla.setSpacingAfter(20);
 		tabla.addCell(ctitulo);	
 		tabla.addCell(csalto);
