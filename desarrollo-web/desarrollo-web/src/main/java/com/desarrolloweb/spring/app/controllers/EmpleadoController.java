@@ -23,6 +23,7 @@ import com.desarrolloweb.spring.app.repositories.EmpleadoRepository;
 import com.desarrolloweb.spring.app.util.PageRender;
 import com.desarrolloweb.spring.app.entities.Audit;
 import com.desarrolloweb.spring.app.entities.Empleado;
+import com.desarrolloweb.spring.app.entities.Proveedor;
 @Controller
 public class EmpleadoController {
 
@@ -49,10 +50,11 @@ public class EmpleadoController {
 		Pageable pageRequest = PageRequest.of(page, 4);
 
 		Page<Empleado> empleados= empleadoRepository.findAll(pageRequest);
-
+		Iterable<Empleado> listaEmpleados=empleadoRepository.findAll();
 		PageRender<Empleado> pageRender = new PageRender<Empleado>("/listar-empleados", empleados);
 		model.addAttribute("titulo", "Listado de empleados");
 		model.addAttribute("empleados", empleados);
+		model.addAttribute("empleadoDoc",listaEmpleados);
 		model.addAttribute("page", pageRender);
 		return "empleados";
 	}
